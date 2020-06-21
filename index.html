@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script>
+        window.addEventListener('load', (event) => {
+            // loop for employees
+            employees.forEach(function (data, index) {
+                document.getElementById("body").innerHTML += ("{name} {surname} old salary: {salary} -> new salary {salary * 1.5}").injectObject(data);
+                document.getElementById("body").innerHTML += "<br />";
+            });
+        });
+
+        // Replaces all matches in string
+        function replaceAll(string, search, replace) { return string.split(search).join(replace); }
+      
+        // injects the object into the text (as a string extension method)
+        String.prototype.injectObject = function (obj) {
+
+            var str = this;
+
+             // detects all {*} expressions
+            var matches = this.match(/\{(.*?)\}/g);
+
+            for (var p in obj)
+                eval("var " + p + " = obj." + p + ";"); // creates variables with the same name as properties
+
+            for (var i = 0; i < matches.length; i++)
+                str = replaceAll(str, matches[i], eval(matches[i])); // replace the results of the relevant fields
+
+            return str; // return result
+        }
+
+        // list of employees
+        var employees = [{
+                "name": "Eren",
+                "surname": "Güler",
+                "salary": 1000
+            },
+            {
+                "name": "Ömer",
+                "surname": "Poyraz",
+                "salary": 2000
+            }
+        ];
+    </script>
+</head>
+<body id="body"></body>
+</html>
