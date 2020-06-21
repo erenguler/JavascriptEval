@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title></title>
     <script>
         window.addEventListener('load', (event) => {
+
+            document.getElementById("body").innerHTML += ("Template: {name} {surname} old salary: {salary} -> new salary {salary * 1.5}");
+            document.getElementById("body").innerHTML += "<br />";
+            document.getElementById("body").innerHTML += "<br />";
+
             // loop for employees
             employees.forEach(function (data, index) {
-                document.getElementById("body").innerHTML += ("{name} {surname} old salary: {salary} -> new salary {salary * 1.5}").injectObject(data);
+                document.getElementById("body").innerHTML += (
+                        "{name} {surname} old salary: {salary} -> new salary {salary * 1.5}")
+                    .injectObject(data);
                 document.getElementById("body").innerHTML += "<br />";
             });
         });
 
         // Replaces all matches in string
-        function replaceAll(string, search, replace) { return string.split(search).join(replace); }
-      
+        function replaceAll(string, search, replace) {
+            return string.split(search).join(replace);
+        }
+
         // injects the object into the text (as a string extension method)
         String.prototype.injectObject = function (obj) {
 
             var str = this;
 
-             // detects all {*} expressions
+            // detects all {*} expressions
             var matches = this.match(/\{(.*?)\}/g);
 
             for (var p in obj)
@@ -45,5 +55,7 @@
         ];
     </script>
 </head>
+
 <body id="body"></body>
+
 </html>
