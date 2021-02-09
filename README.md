@@ -1,6 +1,6 @@
 # JavascriptEval
 Javascript Eval Example
 
-like AngulerJS
+like AngularJS
 
 ![Image of Yaktocat](https://raw.githubusercontent.com/erenguler/JavascriptEval/master/img.jpg)
